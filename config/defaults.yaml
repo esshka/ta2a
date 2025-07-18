@@ -1,0 +1,68 @@
+# Global default parameters for breakout evaluation
+# These are the base settings applied to all instruments and plans
+
+breakout_params:
+  # Penetration thresholds
+  penetration_pct: 0.05  # 0.05% minimum penetration past entry level
+  penetration_natr_mult: 0.25  # ATR-based penetration multiplier
+  
+  # Volume confirmation
+  min_rvol: 1.5  # 1.5x average volume required for breakout confirmation
+  
+  # Confirmation gates
+  confirm_close: true  # Require bar close beyond level vs time-based
+  confirm_time_ms: 750  # Hold duration if confirm_close=false (milliseconds)
+  
+  # Retest logic
+  allow_retest_entry: false  # Use momentum entry vs retest entry mode
+  retest_band_pct: 0.03  # 0.03% proximity band for retest entry
+  
+  # Invalidation rules
+  fakeout_close_invalidate: true  # Invalidate if price returns to range
+  
+  # Order book analysis
+  ob_sweep_check: true  # Require order book sweep confirmation
+  
+  # Volatility filters
+  min_break_range_atr: 0.5  # Minimum break candle range (ATR multiples)
+
+# ATR calculation settings
+atr_params:
+  period: 14  # ATR calculation period
+  multiplier: 2.0  # ATR multiplier for volatility-based thresholds
+
+# Spike filtering settings
+spike_filter:
+  enable: true  # Enable ATR-based spike filtering
+  atr_multiplier: 10.0  # ATR multiplier for spike detection (10x ATR)
+  fallback_pct: 0.5  # Fallback percentage filter when ATR unavailable (50%)
+
+# Volume analysis settings
+volume_params:
+  rvol_period: 20  # Relative volume lookback period
+  min_volume_threshold: 1000  # Minimum volume required for evaluation
+
+# Order book analysis settings
+orderbook_params:
+  imbalance_threshold: 0.3  # Bid/ask imbalance threshold
+  sweep_detection: true  # Enable liquidity sweep detection
+  min_depth_levels: 3  # Minimum order book depth levels required
+
+# Time-based settings
+time_params:
+  evaluation_timeframe: "1m"  # Primary evaluation timeframe
+  max_age_seconds: 60  # Maximum age for market data
+  timezone: "UTC"  # Market data timezone
+
+# Signal scoring settings
+scoring_params:
+  base_strength: 50  # Base signal strength (0-100)
+  volume_weight: 0.3  # Volume confirmation weight
+  penetration_weight: 0.4  # Penetration distance weight
+  volatility_weight: 0.3  # Volatility context weight
+
+# Logging settings
+logging:
+  level: "INFO"
+  structured: true
+  audit_trail: true  # Log all gating decisions

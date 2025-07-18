@@ -1,0 +1,53 @@
+# Instrument-specific parameter overrides
+# These settings override global defaults for specific instruments
+
+instruments:
+  # Bitcoin perpetual swap
+  "BTC-USD-SWAP":
+    breakout_params:
+      penetration_pct: 0.08  # Higher threshold for BTC volatility
+      penetration_natr_mult: 0.3  # Higher ATR-based penetration
+      min_rvol: 2.0  # Higher volume requirement
+      confirm_time_ms: 1000  # Longer confirmation time for BTC
+      allow_retest_entry: true  # Enable retest mode for BTC
+      retest_band_pct: 0.04  # Wider retest band for BTC volatility
+    atr_params:
+      period: 20  # Longer ATR period for BTC
+    volume_params:
+      min_volume_threshold: 5000  # Higher volume threshold
+  
+  # Ethereum perpetual swap  
+  "ETH-USD-SWAP":
+    breakout_params:
+      penetration_pct: 0.06  # Moderate threshold for ETH
+      min_rvol: 1.8
+      ob_sweep_check: false  # Disable order book sweep for ETH
+      min_break_range_atr: 0.6  # Slightly higher minimum range
+    atr_params:
+      period: 16
+    volume_params:
+      min_volume_threshold: 3000
+  
+  # Solana perpetual swap
+  "SOL-USD-SWAP":
+    breakout_params:
+      penetration_pct: 0.10  # Higher threshold for SOL volatility
+      min_rvol: 2.5  # Much higher volume requirement
+      fakeout_close_invalidate: false  # Less strict fakeout protection
+      confirm_close: false  # Use time-based confirmation
+      confirm_time_ms: 500  # Shorter confirmation time for SOL
+    volume_params:
+      min_volume_threshold: 2000
+  
+  # Lower cap altcoins - more conservative settings
+  "DOGE-USD-SWAP":
+    breakout_params:
+      penetration_pct: 0.12  # Very high threshold for meme coins
+      penetration_natr_mult: 0.4  # Higher ATR-based penetration
+      min_rvol: 3.0  # Very high volume requirement
+      confirm_close: true  # Strict confirmation
+      allow_retest_entry: false  # Disable retest for volatile assets
+      ob_sweep_check: true  # Require order book sweep for meme coins
+      min_break_range_atr: 0.8  # Higher minimum range requirement
+    scoring_params:
+      base_strength: 40  # Lower base strength for risky assets

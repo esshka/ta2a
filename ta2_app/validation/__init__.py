@@ -1,0 +1,1 @@
+"""Signal validation utilities."""

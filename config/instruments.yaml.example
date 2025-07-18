@@ -1,0 +1,42 @@
+# Example instrument-specific configuration overrides
+# Place this file at config/instruments.yaml to enable instrument-specific settings
+
+instruments:
+  # Bitcoin perpetual - higher volatility asset
+  BTC-USDT-SWAP:
+    breakout:
+      penetration_pct: 0.08          # Require larger move for BTC
+      min_rvol: 2.0                  # Higher volume threshold
+      min_break_range_atr: 0.7       # Stronger breakout candle requirement
+      
+  # Ethereum perpetual - medium volatility
+  ETH-USDT-SWAP:
+    breakout:
+      penetration_pct: 0.06
+      min_rvol: 1.8
+      
+  # Altcoins - lower liquidity, need different thresholds
+  ADA-USDT-SWAP:
+    breakout:
+      penetration_pct: 0.12          # Larger moves required for low-cap
+      min_rvol: 1.2                  # Lower volume requirements
+      ob_sweep_check: false          # Disable order book analysis for thin books
+      confirm_time_ms: 1500          # Longer confirmation time
+      
+  # High-frequency major pair
+  EUR-USD:
+    breakout:
+      penetration_pct: 0.02          # Very small moves in FX
+      penetration_natr_mult: 0.5     # Higher ATR multiplier
+      confirm_close: false           # Use time-based confirmation
+      confirm_time_ms: 500           # Fast confirmation
+
+# Global overrides (applied to all instruments)
+# These override the defaults but are overridden by instrument-specific settings
+global_overrides:
+  orderbook:
+    max_levels: 10                   # Analyze more book depth
+    depletion_threshold: 0.15        # Lower sweep threshold
+  
+  volume:
+    rvol_period: 25                  # Longer volume lookback

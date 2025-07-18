@@ -46,8 +46,8 @@ The system follows functional programming principles with immutable state manage
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd ta2-app
+git clone https://github.com/esshka/ta2a.git
+cd ta2a
 ```
 
 2. Verify Python installation:
